@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>DeviceOrientation Events Demo</title>
+</head>
+<body>
+<h3>deviceorientation</h3>
+<p id="deviceorientation"></p>
+<a id="deviceorientation_data">Get Data</a>
+<h3>deviceorientationabsolute</h3>
+<p id="deviceorientationabsolute"></p>
+<a id="deviceorientationabsolute_data">Get Data</a>
+<h3>devicemotion</h3>
+<p id="devicemotion"></p>
+<a id="devicemotion_data">Get Data</a>
+<script>
+deviceorientation_data = "time,alpha,beta,gamma\n";
+window.addEventListener('deviceorientation', (event) => {
+  document.getElementById('deviceorientation').innerHTML = `
+<pre>
+  alpha: ${event.alpha}
+  beta: ${event.beta}
+  gamma: ${event.gamma}
+  absolute: ${event.absolute}
+</pre>
+`;
+ deviceorientation_data += event.timeStamp + "," + event.alpha + "," + event.beta + "," + event.gamma + "\n";
+ document.getElementById('deviceorientation_data').href="data:text/csv;charset=utf-8,"+escape(deviceorientation_data);
+});
+
+deviceorientationabsolute_data = "time,alpha,beta,gamma\n";
+window.addEventListener('deviceorientationabsolute', (event) => {
+  document.getElementById('deviceorientationabsolute').innerHTML = `
+<pre>
+  alpha: ${event.alpha}
+  beta: ${event.beta}
+  gamma: ${event.gamma}
+  absolute: ${event.absolute}
+</pre>
+`;
+ deviceorientationabsolute_data += event.timeStamp + "," + event.alpha + "," + event.beta + "," + event.gamma + "\n";
+ document.getElementById('deviceorientationabsolute_data').href="data:text/csv;charset=utf-8,"+escape(deviceorientationabsolute_data);
+});
+
+devicemotion_data = "time,acceleration.x,acceleration.y,acceleration.z,accelerationIncludingGravity.x,accelerationIncludingGravity.y,accelerationIncludingGravity.z,rotationRate.alpha,rotationRate.beta,rotationRate.gamma,interval\n";
+window.addEventListener('devicemotion', (event) => {
+  document.getElementById('devicemotion').innerHTML = `
+<pre>
+  acceleration.x: ${event.acceleration.x}
+  acceleration.y: ${event.acceleration.y}
+  acceleration.z: ${event.acceleration.z}
+  accelerationIncludingGravity.x: ${event.accelerationIncludingGravity.x}
+  accelerationIncludingGravity.y: ${event.accelerationIncludingGravity.y}
+  accelerationIncludingGravity.z: ${event.accelerationIncludingGravity.z}
+  rotationRate.alpha: ${event.rotationRate.alpha}
+  rotationRate.beta: ${event.rotationRate.beta}
+  rotationRate.gamma: ${event.rotationRate.gamma}
+  interval: ${event.interval}
+</pre>
+`;
+ devicemotion_data += event.timeStamp + "," + event.acceleration.x + "," + event.acceleration.y + "," + event.acceleration.z + "," + event.accelerationIncludingGravity.x + "," + event.accelerationIncludingGravity.y + "," + event.accelerationIncludingGravity.z + "," + event.rotationRate.alpha + "," + event.rotationRate.beta + "," + event.rotationRate.gamma + "," + event.interval +"\n";
+ document.getElementById('devicemotion_data').href="data:text/csv;charset=utf-8,"+escape(devicemotion_data);
+});
+</script>
+</body>
+</html>
