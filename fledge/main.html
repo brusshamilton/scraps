@@ -11,7 +11,7 @@
         let myidx = idx;
         let divElement = document.createElement('div');
         divElement.innerText = `Auction ${myidx}`
-        let ffElement = document.createElement('fencedFrame');
+        let ffElement = document.createElement('iframe');
         ffElements[myidx] = ffElement;
         divElement.appendChild(ffElement);
         document.body.appendChild(divElement);
@@ -23,7 +23,7 @@
           decisionLogicUrl: 'https://brusshamilton.github.io/scraps/fledge/decisionLogic.js',
           interestGroupBuyers: ['https://brusshamilton.github.io'],
         }).then((urn)=>{
-          ffElements[myidx].config = urn;
+          ffElements[myidx].src = urn;
         }, (error)=> {
           console.log(`auction ${myidx} failed: ${error}`);
         });
