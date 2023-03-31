@@ -12,11 +12,11 @@
           let divElement = document.createElement('div');
           divElement.innerText = `Auction ${myidx}`
           let ffElement = document.createElement('fencedFrame');
-          ffelement.config = urn;
+          ffElement.config = urn;
           divElement.appendChild(ffElement);
           document.body.appendChild(divElement);
-        }, ()=> {
-          console.log(`auction ${myidx} failed`);
+        }, (error)=> {
+          console.log(`auction ${myidx} failed: ${error}`);
         });
       }
     </script>
