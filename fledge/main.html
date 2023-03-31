@@ -6,6 +6,16 @@
       if (params.has("numAuctions")) {
         NUM_AUCTIONS = params.get("numAuctions");
       }
+      let ffElements = [];
+      for (idx = 0; idx < NUM_AUCTIONS; idx++) {
+        let myidx = idx;
+        let divElement = document.createElement('div');
+        divElement.innerText = `Auction ${myidx}`
+        let ffElement = document.createElement('fencedFrame');
+        ffElements[myidx] = ffElement;
+        divElement.appendChild(ffElement);
+        document.body.appendChild(divElement);
+      }
       for (idx = 0; idx < NUM_AUCTIONS; idx++) {
         let myidx = idx;
         navigator.runAdAuction({
@@ -13,12 +23,7 @@
           decisionLogicUrl: 'https://brusshamilton.github.io/scraps/fledge/decisionLogic.js',
           interestGroupBuyers: ['https://brusshamilton.github.io'],
         }).then((urn)=>{
-          let divElement = document.createElement('div');
-          divElement.innerText = `Auction ${myidx}`
-          let ffElement = document.createElement('fencedFrame');
-          ffElement.config = urn;
-          divElement.appendChild(ffElement);
-          document.body.appendChild(divElement);
+          ffElements[myidx].config = urn;
         }, (error)=> {
           console.log(`auction ${myidx} failed: ${error}`);
         });
