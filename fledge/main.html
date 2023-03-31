@@ -10,13 +10,13 @@
           interestGroupBuyers: 'https://brusshamilton.github.io',
         }).then((urn)=>{
           let divElement = document.createElement('div');
-          divElement.innerText = `Auction {myidx}`
+          divElement.innerText = `Auction ${myidx}`
           let ffElement = document.createElement('fencedFrame');
           ffelement.config = urn;
           divElement.appendChild(ffElement);
           document.body.appendChild(divElement);
         }, ()=> {
-          console.log(`auction {myidx} failed`);
+          console.log(`auction ${myidx} failed`);
         });
       }
     </script>
