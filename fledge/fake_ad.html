@@ -1,0 +1,17 @@
+<html>
+  <body>
+    <script blocking="render">
+      let location = window.location;
+      let params = URLSearchParams(window.location);
+      if (!params.has("width") || !params.has("height")) {
+        params.append("width", window.screen.width);
+        params.append("height", window.screen.height);
+        location.search = '?' + params.toString();
+        window.location.assign(location);
+      }
+      var elemDiv = document.createElement('div');
+      elemDiv.innerText = "Added to the body!";
+      document.body.appendChild(elemDiv);
+    </script>
+  </body>
+</html>

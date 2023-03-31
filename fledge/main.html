@@ -1,0 +1,24 @@
+<html>
+  <body>
+    <script>
+      let NUM_AUCTIONS = 1000;
+      for (idx = 0; idx < NUM_AUCTIONS; idx++) {
+        let myidx = idx;
+        navigator.runAdAuction({
+          seller: 'https://brusshamilton.github.io',
+          decisionLogicUrl: 'https://brusshamilton.github.io/fledge/decisionLogic.js',
+          interestGroupBuyers: 'https://brusshamilton.github.io',
+        }).then((urn)=>{
+          let divElement = document.createElement('div');
+          divElement.innerText = `Auction {myidx}`
+          let ffElement = document.createElement('fencedFrame');
+          ffelement.config = urn;
+          divElement.appendChild(ffElement);
+          document.body.appendChild(divElement);
+        }, ()=> {
+          console.log(`auction {myidx} failed`);
+        });
+      }
+    </script>
+  </body>
+</html>
