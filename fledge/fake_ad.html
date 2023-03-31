@@ -1,12 +1,12 @@
 <html>
   <body>
     <script blocking="render">
-      let location = window.location;
-      let params = new URLSearchParams('?'+window.location.hash.substring(1));
+      let new_location = window.location;
+      let params = new URLSearchParams('?'+new_location.hash.substring(1));
       if (!params.has("width") || !params.has("height")) {
         params.append("width", window.screen.width);
         params.append("height", window.screen.height);
-        location.hash = '#' + params.toString();
+        new_location.hash = '#' + params.toString();
         window.location.assign(location);
       }
       var elemDiv = document.createElement('div');
