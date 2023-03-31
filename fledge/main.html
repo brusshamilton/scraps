@@ -7,7 +7,7 @@
         navigator.runAdAuction({
           seller: 'https://brusshamilton.github.io',
           decisionLogicUrl: 'https://brusshamilton.github.io/scraps/fledge/decisionLogic.js',
-          interestGroupBuyers: 'https://brusshamilton.github.io',
+          interestGroupBuyers: ['https://brusshamilton.github.io'],
         }).then((urn)=>{
           let divElement = document.createElement('div');
           divElement.innerText = `Auction ${myidx}`
