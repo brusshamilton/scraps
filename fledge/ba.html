@@ -1,0 +1,51 @@
+<html>
+  <body>
+    <script blocking="render">
+      let FETCH_URL="";
+      let SELLER="";
+      let params = new URLSearchParams('?'+window.location.hash.substring(1));
+      if (params.has("fetch_url")) {
+        FETCH_URL = params.get("fetch_url");
+      }
+      if (params.has("seller")) {
+        SELLER = params.get("seller");
+      }
+      let buyer = window.location.origin;
+      navigator.getInterestGroupAdAuctionData({
+        seller: SELLER
+        }).then((data)=>{
+          if (data.request.length == 0) {
+            console.log("Got no data");
+            return;
+          }
+          let b64Data = btoa(String.fromCharCode.apply(null, data.request));
+          let postBody = `{
+'protectedAudienceCiphertext': '${b64Data}',
+'auctionConfig': {
+  'seller_signals': '{}',
+  'auction_signals': '{}',
+  'buyer_list': ['${buyer}'],
+  'seller': '${SELLER}',
+  'perBuyerConfig': {
+    '${buyer}': {'buyerSignals': '{}'}
+    },
+  'codeExperimentSpec': {}
+  },
+'clientType': 2
+}`;
+          fetch(FETCH_URL, {
+            method: 'post',
+            body: postBody}).then((responseStr)=>{
+              console.log(JSON.stringify(responseStr));
+              let response = Uint8Array.from(atob(responseStr), c => c.charCodeAt(0));
+              navigator.runAdAuction({
+                seller: SELLER,
+                interestGroupBuyers: [buyer],
+                serverResponse: response,
+                requestId: a.requestId,
+              }).then( (urn) => { console.log(JSON.stringify(urn)); });
+          });
+        });
+   </script>
+  </body>
+</html>
