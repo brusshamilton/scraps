@@ -35,6 +35,7 @@
 }`;
           fetch(FETCH_URL, {
             method: 'post',
+            mode: 'no-cors',
             body: postBody}).then((responseStr)=>{
               console.log(JSON.stringify(responseStr));
               let response = Uint8Array.from(atob(responseStr), c => c.charCodeAt(0));
